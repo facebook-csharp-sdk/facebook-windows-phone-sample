@@ -39,3 +39,4 @@ Thumbs.db
 !libs/*/[Bb]in/
 
 packages/
+NuGet.exe

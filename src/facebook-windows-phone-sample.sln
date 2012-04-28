@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010 Express for Windows Phone
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "facebook-windows-phone-sample", "facebook-windows-phone-sample\facebook-windows-phone-sample.csproj", "{756FDBA3-1EA8-4518-9A35-CFF2CB07EDCE}"
 EndProject
 Global
