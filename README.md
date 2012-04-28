@@ -1,4 +1,4 @@
-# Facebook Sample using Facebook C# SDK with Windows Phone 7
+# Facebook C# SDK Sample with Windows Phone 7
 
 This sample demonstrates the use of Facebook C# SDK v6 as a Windows Phone 7 Application.
 
