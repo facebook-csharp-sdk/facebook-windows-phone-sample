@@ -86,7 +86,7 @@ namespace facebook_windows_phone_sample.Pages
             {
                 if (e.Error != null)
                 {
-                    MessageBox.Show(e.Error.Message);
+                    Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
                     return;
                 }
 
