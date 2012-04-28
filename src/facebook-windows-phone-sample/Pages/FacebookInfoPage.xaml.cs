@@ -11,19 +11,13 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 
-namespace facebook_windows_phone_sample
+namespace facebook_windows_phone_sample.Pages
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class FacebookInfoPage : PhoneApplicationPage
     {
-        // Constructor
-        public MainPage()
+        public FacebookInfoPage()
         {
             InitializeComponent();
-        }
-
-        private void btnFacebookLogin_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/FacebookLoginPage.xaml", UriKind.Relative));
         }
     }
 }
