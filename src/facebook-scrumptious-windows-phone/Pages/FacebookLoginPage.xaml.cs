@@ -11,9 +11,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Facebook;
-using ScrumptiousWindowsPhone.ViewModel;
+using Facebook.Scrumptious.WindowsPhone.ViewModel;
 
-namespace ScrumptiousWindowsPhone.Pages
+namespace Facebook.Scrumptious.WindowsPhone.Pages
 {
     public partial class FacebookLoginPage : PhoneApplicationPage
     {

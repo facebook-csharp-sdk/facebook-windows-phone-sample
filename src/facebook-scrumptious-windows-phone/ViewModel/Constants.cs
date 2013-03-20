@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ScrumptiousWindowsPhone.ViewModel
+namespace Facebook.Scrumptious.WindowsPhone.ViewModel
 {
     class Constants
     {

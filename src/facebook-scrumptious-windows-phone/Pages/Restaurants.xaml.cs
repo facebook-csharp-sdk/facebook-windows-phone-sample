@@ -9,9 +9,9 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Device.Location;
 using System.Collections.ObjectModel;
-using ScrumptiousWindowsPhone.ViewModel;
+using Facebook.Scrumptious.WindowsPhone.ViewModel;
 
-namespace ScrumptiousWindowsPhone.Pages
+namespace Facebook.Scrumptious.WindowsPhone.Pages
 {
     public partial class Restaurants : PhoneApplicationPage
     {

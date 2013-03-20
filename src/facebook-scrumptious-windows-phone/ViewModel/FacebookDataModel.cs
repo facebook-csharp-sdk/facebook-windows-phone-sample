@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media.Imaging;
 
-namespace ScrumptiousWindowsPhone.ViewModel
+namespace Facebook.Scrumptious.WindowsPhone.ViewModel
 {
     public class Friend
     {

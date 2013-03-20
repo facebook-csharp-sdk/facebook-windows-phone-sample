@@ -8,12 +8,12 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Facebook;
-using ScrumptiousWindowsPhone.ViewModel;
+using Facebook.Scrumptious.WindowsPhone.ViewModel;
 using System.Windows.Media.Imaging;
 using System.Device.Location;
 
 
-namespace ScrumptiousWindowsPhone.Pages
+namespace Facebook.Scrumptious.WindowsPhone.Pages
 {
     public partial class LandingPage : PhoneApplicationPage
     {
