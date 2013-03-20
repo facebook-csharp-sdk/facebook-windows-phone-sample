@@ -71,11 +71,11 @@ namespace Facebook.Scrumptious.WindowsPhone.Pages
                 Dispatcher.BeginInvoke(() =>
                 {
                     //ProfileName.Text = "Hi " + (string)result["name"];
-                    FacebookData.Me.Name = String.Format("{0} {1}", (string)result["first_name"], (string)result["last_name"]);
-                    FacebookData.Me.PictureUri = new Uri(string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.FacebookId, "square", App.AccessToken));
+                    string myName = String.Format("{0} {1}", (string)result["first_name"], (string)result["last_name"]);
+                    Uri myPictureUri = new Uri(string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.FacebookId, "square", App.AccessToken));
 
-                    this.MyImage.Source = new BitmapImage(FacebookData.Me.PictureUri);
-                    this.MyName.Text = FacebookData.Me.Name;
+                    this.MyImage.Source = new BitmapImage(myPictureUri);
+                    this.MyName.Text = myName;
                 });
             };
 
