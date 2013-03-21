@@ -22,13 +22,13 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="FACEBOOK C# SDK" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="login" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Scrumptious" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Button Content="Login To Facebook" Height="73" HorizontalAlignment="Left" Margin="101,252,0,0" Name="btnFacebookLogin" VerticalAlignment="Top" Width="276" Click="btnFacebookLogin_Click" />
+            <Button Content="Login with Facebook" Height="73" HorizontalAlignment="Left" Margin="79,252,0,0" Name="btnFacebookLogin" VerticalAlignment="Top" Width="309" Click="btnFacebookLogin_Click" />
         </Grid>
     </Grid>
  
