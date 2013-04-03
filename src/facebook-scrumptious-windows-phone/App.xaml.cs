@@ -12,6 +12,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Facebook.Client;
+using Facebook.Scrumptious.WindowsPhone.ViewModel;
 
 namespace Facebook.Scrumptious.WindowsPhone
 {
@@ -23,9 +25,11 @@ namespace Facebook.Scrumptious.WindowsPhone
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
 
-
+        public static bool isAuthenticated = false;
+        public static FacebookSessionClient FacebookSessionClient = new FacebookSessionClient(Constants.FacebookAppId);
         internal static string AccessToken = String.Empty;
         internal static string FacebookId = String.Empty;
+
 
         /// <summary>
         /// Constructor for the Application object.
@@ -45,7 +49,7 @@ namespace Facebook.Scrumptious.WindowsPhone
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // Display the current frame rate counters.
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                //Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;

@@ -11,6 +11,8 @@ using Facebook;
 using Facebook.Scrumptious.WindowsPhone.ViewModel;
 using System.Windows.Media.Imaging;
 using System.Device.Location;
+using Facebook.Client;
+using System.Threading.Tasks;
 
 
 namespace Facebook.Scrumptious.WindowsPhone.Pages
@@ -20,7 +22,6 @@ namespace Facebook.Scrumptious.WindowsPhone.Pages
         public LandingPage()
         {
             InitializeComponent();
-
             LoadUserInfo();
         }
 
@@ -101,13 +102,26 @@ namespace Facebook.Scrumptious.WindowsPhone.Pages
 
 
 
-        private void PostActionToFBHandler(object sender, EventArgs evtArgs)
+        async private void PostActionToFBHandler(object sender, EventArgs evtArgs)
         {
             if (FacebookData.SelectedFriends.Count < 1
                 || FacebookData.SelectedMeal.Name == String.Empty
                 || FacebookData.IsRestaurantSelected == false)
             {
                 MessageBox.Show("Please select friends, a place to eat and something you ate before attempting to share!");
+                return;
+            }
+
+            FacebookSession session;
+            string message = String.Empty;
+            try
+            {
+                session = await App.FacebookSessionClient.LoginAsync("publish_stream");
+            }
+            catch (InvalidOperationException e)
+            {
+                message = "Login failed! Exception details: " + e.Message;
+                MessageBox.Show(message);
                 return;
             }
 
@@ -126,6 +140,11 @@ namespace Facebook.Scrumptious.WindowsPhone.Pages
                 Dispatcher.BeginInvoke(() =>
                 {
                     MessageBox.Show("Posted Open Graph Action, id: " + (string)result["id"], "Result", MessageBoxButton.OK);
+
+                    // reset the selections after the post action has successfully concluded
+                    this.MealName.Text = "Select One";
+                    this.restaurantLocationTextBlock.Text = "Select One";
+                    this.WithWhoTextBox.Text = "Select Friends";
                 });
             };
 

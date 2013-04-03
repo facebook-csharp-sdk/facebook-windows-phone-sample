@@ -12,6 +12,8 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Facebook;
 using Facebook.Scrumptious.WindowsPhone.ViewModel;
+using Facebook.Client;
+using System.Threading.Tasks;
 
 namespace Facebook.Scrumptious.WindowsPhone.Pages
 {
@@ -26,80 +28,42 @@ namespace Facebook.Scrumptious.WindowsPhone.Pages
         /// For extensive list of available extended permissions refer to 
         /// https://developers.facebook.com/docs/reference/api/permissions/
         /// </remarks>
-        private const string ExtendedPermissions = "user_about_me,read_stream,publish_stream";
+        private const string ExtendedPermissions = "user_about_me,read_stream";
 
         private readonly FacebookClient _fb = new FacebookClient();
 
         public FacebookLoginPage()
         {
             InitializeComponent();
+            this.Loaded += FacebookLoginPage_Loaded;
         }
 
-        private void webBrowser1_Loaded(object sender, RoutedEventArgs e)
+        async void FacebookLoginPage_Loaded(object sender, RoutedEventArgs e)
         {
-            var loginUrl = GetFacebookLoginUrl(AppId, ExtendedPermissions);
-            webBrowser1.Navigate(loginUrl);
-        }
-
-        private Uri GetFacebookLoginUrl(string appId, string extendedPermissions)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters["client_id"] = appId;
-            parameters["redirect_uri"] = "https://www.facebook.com/connect/login_success.html";
-            parameters["response_type"] = "token";
-            parameters["display"] = "touch";
-
-            // add the 'scope' only if we have extendedPermissions.
-            if (!string.IsNullOrEmpty(extendedPermissions))
+            if (!App.isAuthenticated)
             {
-                // A comma-delimited list of permissions
-                parameters["scope"] = extendedPermissions;
-            }
-
-            return _fb.GetLoginUrl(parameters);
-        }
-
-        private void webBrowser1_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-            FacebookOAuthResult oauthResult;
-            if (!_fb.TryParseOAuthCallbackUrl(e.Uri, out oauthResult))
-            {
-                return;
-            }
-
-            if (oauthResult.IsSuccess)
-            {
-                var accessToken = oauthResult.AccessToken;
-                LoginSucceded(accessToken);
-            }
-            else
-            {
-                // user cancelled
-                MessageBox.Show(oauthResult.ErrorDescription);
+                App.isAuthenticated = true;
+                await Authenticate();
             }
         }
 
-        private void LoginSucceded(string accessToken)
+        private FacebookSession session;
+        private async Task Authenticate()
         {
-            var fb = new FacebookClient(accessToken);
-
-            fb.GetCompleted += (o, e) =>
+            string message = String.Empty;
+            try
             {
-                if (e.Error != null)
-                {
-                    Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
-                    return;
-                }
+                session = await App.FacebookSessionClient.LoginAsync("user_about_me,read_stream");
+                App.AccessToken = session.AccessToken;
+                App.FacebookId = session.FacebookId;
 
-                var result = (IDictionary<string, object>)e.GetResultData();
-                var id = (string)result["id"];
-
-                App.AccessToken = accessToken;
-                App.FacebookId = id;
                 Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/Pages/LandingPage.xaml", UriKind.Relative)));
-            };
-
-            fb.GetAsync("me?fields=id");
+            }
+            catch (InvalidOperationException e)
+            {
+                message = "Login failed! Exception details: " + e.Message;
+                MessageBox.Show(message);
+            }
         }
     }
 }
